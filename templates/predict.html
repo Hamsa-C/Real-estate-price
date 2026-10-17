@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Estate Price Prediction</title>
+</head>
+<body>
+
+<h2>Predict Price</h2>
+
+<form method="POST">
+    <input type="number" name="area" placeholder="Enter Area in sqft" required>
+    <button type="submit">Predict</button>
+</form>
+
+{% if price %}
+<h3>Predicted Price: {{ price }}</h3>
+{% endif %}
+
+<br>
+<a href="/logout">Logout</a>
+
+</body>
+</html>

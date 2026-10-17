@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Valuation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+        h2 {
+            text-align: center;
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            padding: 10px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .logout {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .logout a {
+            text-decoration: none;
+            padding: 8px 16px;
+            background: #dc3545;
+            color: white;
+            border-radius: 5px;
+        }
+        .logout a:hover {
+            background: #b02a37;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logout">
+            <a href="/logout">Logout</a>
+        </div>
+
+    
+
+        <h2>Real Estate Valuation</h2>
+        <form method="POST">
+            <label for="latitude">Latitude:</label>
+            <input type="number" step="any" id="latitude" name="latitude" required>
+
+            <label for="longitude">Longitude:</label>
+            <input type="number" step="any" id="longitude" name="longitude" required>
+
+            <label for="proximity">Proximity to City Center (km):</label>
+            <input type="number" step="any" id="proximity" name="proximity" required>
+
+            <label for="amenities">Nearby Amenities:</label>
+            <input type="number" id="amenities" name="amenities" required>
+
+            <label for="area">Area in sqft:</label>
+            <input type="number" id="area" name="area" required>
+
+            <label for="bedrooms">Bedrooms:</label>
+            <input type="number" id="bedrooms" name="bedrooms" required>
+
+            <label for="bathrooms">Bathrooms:</label>
+            <input type="number" id="bathrooms" name="bathrooms" required>
+
+            <label for="year_built">Year Built:</label>
+            <input type="number" id="year_built" name="year_built" required>
+
+            <label for="garage">Garage (0 or 1):</label>
+            <input type="number" id="garage" name="garage" required>
+
+            <label for="swimming_pool">Swimming Pool (0 or 1):</label>
+            <input type="number" id="swimming_pool" name="swimming_pool" required>
+
+            <label for="garden">Garden (0 or 1):</label>
+            <input type="number" id="garden" name="garden" required>
+
+            <label for="total_rooms">Total Rooms:</label>
+            <input type="number" id="total_rooms" name="total_rooms" required>
+
+            <label for="building_condition">Building Condition:</label>
+            <select id="building_condition" name="building_condition" required>
+                <option value="New">New</option>
+                <option value="Average">Average</option>
+                <option value="Good">Good</option>
+                <option value="Poor">Poor</option>
+            </select>
+
+            <label for="property_type">Property Type:</label>
+            <select id="property_type" name="property_type" required>
+                <option value="Villa">Villa</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Townhouse">Townhouse</option>
+            </select>
+
+            <label for="median_income">Median Income:</label>
+            <input type="number" step="any" id="median_income" name="median_income" required>
+
+            <label for="property_tax_rate">Property Tax Rate:</label>
+            <input type="number" step="any" id="property_tax_rate" name="property_tax_rate" required>
+
+            <label for="local_crime_rate">Local Crime Rate:</label>
+            <input type="number" step="any" id="local_crime_rate" name="local_crime_rate" required>
+
+            <label for="air_quality_index">Air Quality Index:</label>
+            <input type="number" id="air_quality_index" name="air_quality_index" required>
+
+            <label for="noise_levels">Noise Levels:</label>
+            <input type="number" id="noise_levels" name="noise_levels" required>
+
+            <label for="price_per_sqft">Price Per Sqft:</label>
+            <input type="number" step="any" id="price_per_sqft" name="price_per_sqft" required>
+
+            <label for="room_to_area_ratio">Room to Area Ratio:</label>
+            <input type="number" step="any" id="room_to_area_ratio" name="room_to_area_ratio" required>
+
+            <button type="submit">Predict Property Price</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+           Predicted Property Price: ${{ "%.2f"|format(prediction) }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
